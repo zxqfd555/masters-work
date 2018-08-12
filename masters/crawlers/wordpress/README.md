@@ -4,7 +4,7 @@
 
 A thank-you for the seeds list goes to "Education First".
 
-They seeds themselves are taken from the page of 3000 most common words in English: https://www.ef.com/english-resources/english-vocabulary/top-3000-words/
+The seeds themselves were taken from the page of 3000 most common words in English: https://www.ef.com/english-resources/english-vocabulary/top-3000-words/
 
 ## How to use
 
