@@ -2,9 +2,7 @@ import logging
 import uuid
 from multiprocessing.dummy import Pool as ThreadPool
 
-import requests
-
-from masters.core.worker import BasicDownloadWorker
+from masters.core.download import BasicDownloadTask
 
 
 LOGGER = logging.getLogger(__name__)
@@ -12,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 LANGUAGE_PATTERN = 'https://{}.wikipedia.org/wiki/Special:Random'
 
 
-class DownloadWorker(BasicDownloadWorker):
+class DownloadTask(BasicDownloadTask):
 
     def execute(self):
         response = self.download_url(self._url)
@@ -20,14 +18,14 @@ class DownloadWorker(BasicDownloadWorker):
             f.write(response.text.encode('utf-8'))
 
 
-def generate_workers(template_worker, num_articles):
-    for _ in xrange(num_articles):
+def generate_tasks(template_worker, num_articles):
+    for _ in range(num_articles):
         yield template_worker
 
 
 def download_random_articles(language, num_articles, num_threads):
     url = LANGUAGE_PATTERN.format(language)
-    workers = generate_workers(DownloadWorker.from_settings(url=url), num_articles)
+    workers = generate_tasks(DownloadTask.from_settings(url=url), num_articles)
     pool = ThreadPool(num_threads)
     pool.map(lambda x: x.execute(), workers)
 

@@ -2,3 +2,4 @@
 venv
 masters/crawlers/wiki/results
 masters/crawlers/wordpress/results
+**/__pycache__

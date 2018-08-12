@@ -1,22 +1,29 @@
 import json
 import time
+import os
 from abc import abstractmethod
 
 import requests
 
 
-class BasicDownloadWorker:
+class BasicDownloadTask:
 
-    def __init__(self, url, rpt, n_attempts):
+    def __init__(self, url, rpt, n_attempts, meta=None):
         self._url = url
         self._rpt = rpt
         self._n_attempts = n_attempts
+        self._meta = meta
+
+        self._output_path = os.getcwd()
 
     @classmethod
-    def from_settings(cls, url):
-        with open('config.json', 'r') as f:
+    def from_settings(cls, url, meta=None):
+        with open('configs/downloader.json', 'r') as f:
             json_config = json.load(f)
-        return cls(url, **json_config)
+        return cls(url, meta=meta, **json_config)
+
+    def set_output_path(self, output_path):
+        self._output_path = output_path
 
     def download_url(self, url):
         response = None
