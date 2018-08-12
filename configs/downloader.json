@@ -1,4 +1,6 @@
 {
     "rpt": 5,
-    "n_attempts": 3
+    "n_attempts": 3,
+    "timeout": 5,
+    "backoff_rate": 1.2 
 }

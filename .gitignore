@@ -4,3 +4,4 @@ masters/crawlers/wiki/results
 masters/crawlers/wordpress/results
 masters/crawlers/wordpress/dataset.json
 **/__pycache__
+**/*.pyc
