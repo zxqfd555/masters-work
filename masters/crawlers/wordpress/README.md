@@ -18,4 +18,4 @@ The simplest way is (assuming you're in the repo root):
 Keep in mind that from my expirience, that WP API is somehow slow and weak, so I don't recommend setting up much threads, you should also increase the number of retries is you experience lots of download failures.
 On my PC with mediocre internet it took about 20 mins to download 10 articles on every seed from seeds.txt.
 
-You can download the obtained dataset (28722 entries, 226 MB) here: TODO.
+You can download the obtained dataset (28722 entries, 226 MB) here: https://yadi.sk/d/sGPA177g3aA9fw.
