@@ -52,38 +52,6 @@ class DownloadTask(BasicDownloadTask):
         with open(output_path, 'w') as f:
             json.dump(parsed_dataset_lines, f)
 
-    def _remove_html_trace_simple(self, text):
-        chars_lst = []
-        nested_level = 0
-
-        for ch in text:
-            if ch == '<':
-                nested_level += 1
-            elif ch == '>':
-                nested_level -= 1
-            elif nested_level == 0:
-                chars_lst.append(ch)
-        result = ''.join(chars_lst)
-
-        while '&#' in result:
-            position = result.find('&#')
-            length = result[position:].find(';') + 1
-            result = result[:position] + ' ' + result[position + length:]
-
-        result = self._clear_by_prefix(result, '\\u', 6, ' ')
-        result = self._clear_by_prefix(result, '\\n', 2, ' ')
-        result = self._clear_by_prefix(result, '\n', 1, ' ')
-        result = self._clear_by_prefix(result, '&nbsp;', 5, ' ')
-
-        return result
-
-    def _clear_by_prefix(self, string, prefix, deletion_length, replacement_str):
-        while prefix in string:
-            position = string.find(prefix)
-            string = string[:position] + replacement_str + string[position+deletion_length:]
-
-        return string
-
     def _cannonize_tags(self, tags_raw):
         result = []
         for tag in tags_raw:

@@ -26,6 +26,10 @@ class BasicDownloadTask:
             json_config = json.load(f)
         return cls(url, meta=meta, **json_config)
 
+    @abstractmethod
+    def execute(self):
+        raise NotImplementedError
+
     def set_output_path(self, output_path):
         self._output_path = output_path
 
@@ -57,6 +61,34 @@ class BasicDownloadTask:
 
         return response
 
-    @abstractmethod
-    def execute(self):
-        raise NotImplementedError
+    def _remove_html_trace_simple(self, text):
+        chars_lst = []
+        nested_level = 0
+
+        for ch in text:
+            if ch == '<':
+                nested_level += 1
+            elif ch == '>':
+                nested_level -= 1
+            elif nested_level == 0:
+                chars_lst.append(ch)
+        result = ''.join(chars_lst)
+
+        while '&#' in result:
+            position = result.find('&#')
+            length = result[position:].find(';') + 1
+            result = result[:position] + ' ' + result[position + length:]
+
+        result = self._clear_by_prefix(result, '\\u', 6, ' ')
+        result = self._clear_by_prefix(result, '\\n', 2, ' ')
+        result = self._clear_by_prefix(result, '\n', 1, ' ')
+        result = self._clear_by_prefix(result, '&nbsp;', 5, ' ')
+
+        return result
+
+    def _clear_by_prefix(self, string, prefix, deletion_length, replacement_str):
+        while prefix in string:
+            position = string.find(prefix)
+            string = string[:position] + replacement_str + string[position+deletion_length:]
+
+        return string
