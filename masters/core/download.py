@@ -61,7 +61,8 @@ class BasicDownloadTask:
 
         return response
 
-    def _remove_html_trace_simple(self, text):
+    @staticmethod
+    def remove_html_trace_simple(text):
         chars_lst = []
         nested_level = 0
 
@@ -79,14 +80,15 @@ class BasicDownloadTask:
             length = result[position:].find(';') + 1
             result = result[:position] + ' ' + result[position + length:]
 
-        result = self._clear_by_prefix(result, '\\u', 6, ' ')
-        result = self._clear_by_prefix(result, '\\n', 2, ' ')
-        result = self._clear_by_prefix(result, '\n', 1, ' ')
-        result = self._clear_by_prefix(result, '&nbsp;', 5, ' ')
+        result = BasicDownloadTask._clear_by_prefix(result, '\\u', 6, ' ')
+        result = BasicDownloadTask._clear_by_prefix(result, '\\n', 2, ' ')
+        result = BasicDownloadTask._clear_by_prefix(result, '\n', 1, ' ')
+        result = BasicDownloadTask._clear_by_prefix(result, '&nbsp;', 5, ' ')
 
         return result
 
-    def _clear_by_prefix(self, string, prefix, deletion_length, replacement_str):
+    @staticmethod
+    def _clear_by_prefix(string, prefix, deletion_length, replacement_str):
         while prefix in string:
             position = string.find(prefix)
             string = string[:position] + replacement_str + string[position+deletion_length:]
