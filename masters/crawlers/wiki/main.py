@@ -94,7 +94,7 @@ class DownloadTask(BasicDownloadTask):
             'title_raw': title,
             'title_clean': title,
             'content_raw': main_body,
-            'content_clean': self._remove_html_trace_simple(main_body),
+            'content_clean': self.remove_html_trace_simple(main_body),
         }
 
         output_path = os.path.join(self._output_path, '{}.html'.format(uuid.uuid4()))

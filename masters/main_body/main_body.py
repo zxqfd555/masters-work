@@ -1,10 +1,6 @@
 from collections import deque
 from html.parser import HTMLParser
 
-import requests
-
-from masters.core.download import BasicDownloadTask
-
 
 class DOMNode:
     DUMMY_TEXT_NODE = object()
@@ -71,8 +67,8 @@ class DOMNode:
 
 class GenericPageProcessor(HTMLParser):
 
-    MAIN_BODY_TEXT_RATE = 0.45
-    DESCENDANT_HAS_MAIN_BODY_CONTENT_RATE = 0.75
+    MAIN_BODY_TEXT_RATE = 0.30
+    DESCENDANT_HAS_MAIN_BODY_CONTENT_RATE = 0.70
 
     BANNED_TAGS = [
             'script',
@@ -142,19 +138,3 @@ class GenericPageProcessor(HTMLParser):
         for k, v in attrs:
             result[k] = v
         return result
-
-
-def create_example(input_url, output_fn):
-    processor = GenericPageProcessor()
-
-    raw_html = requests.get(input_url, timeout=10).text
-    processor.feed(raw_html)
-    result = BasicDownloadTask.remove_html_trace_simple(processor.get_main_body())
-
-    result_header = """
-    Demo of main body detection. The text below is the extracted main body by the proposed heuristic algorithm.\n
-    Original: {}\n\n
-    """.format(input_url)
-
-    with open(output_fn, 'w', encoding='utf-8') as f:
-        f.write(result_header + result)

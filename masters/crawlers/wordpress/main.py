@@ -25,9 +25,9 @@ class DownloadTask(BasicDownloadTask):
         result = []
         for post in posts:
             content_raw = post['content']
-            content_clean = self._remove_html_trace_simple(content_raw)
+            content_clean = self.remove_html_trace_simple(content_raw)
             title_raw = post['title']
-            title_clean = self._remove_html_trace_simple(title_raw)
+            title_clean = self.remove_html_trace_simple(title_raw)
             tags = self._cannonize_tags(post['tags'].keys())
             result.append(
                 {
