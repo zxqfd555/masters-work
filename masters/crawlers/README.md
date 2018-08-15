@@ -2,6 +2,10 @@
 
 ## In brief
 
+### Third-party datasets
+
+There's a number of datasets, mostly obtained on publications, available here: https://github.com/zelandiya/keyword-extraction-datasets
+
 ### Corner cases
 
 WordPress crawler solves the partial case with very good dataset quality. It crawls only English articles at WordPress.com and fetches article as a text and tags as keywords.
