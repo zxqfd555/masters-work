@@ -85,20 +85,31 @@ class GenericPageProcessor(HTMLParser):
 
         self._links = set()
 
+        self._title = None
+        self._is_processing_title = False
+
     def handle_starttag(self, tag, attrs):
         attrs = self._attrs_to_dict(attrs)
 
         if tag == 'a' and 'href' in attrs:
             self._links.add(attrs['href'])
+        elif tag == 'title':
+            self._is_processing_title = True
 
         current_dom_node = DOMNode(tag, attrs, self._path_from_root[-1])
         self._path_from_root[-1].add_child(current_dom_node)
         self._path_from_root.append(current_dom_node)
 
     def handle_endtag(self, tag):
+        if tag == 'title':
+            self._is_processing_title = False
+
         self._path_from_root.pop()
 
     def handle_data(self, data):
+        if self._is_processing_title:
+            self._title = data
+
         if self._path_from_root[-1].get_tag_name().lower() in self.BANNED_TAGS:
             return
 
@@ -111,6 +122,9 @@ class GenericPageProcessor(HTMLParser):
         super().feed(*args, **kwargs)
 
         self._is_fed_already = True
+
+    def get_title(self):
+        return self._title
 
     def get_links(self):
         return self._links
