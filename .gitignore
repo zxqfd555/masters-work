@@ -4,5 +4,7 @@ masters/crawlers/wiki/results
 masters/crawlers/wordpress/results
 masters/crawlers/quora/results
 masters/crawlers/wordpress/dataset.json
+masters/crawlers/wiki/dataset.json
 **/__pycache__
 **/*.pyc
+local-helpers
