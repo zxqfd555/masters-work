@@ -11,7 +11,8 @@ class RAKEKeywordsExtractor(AbstractKeywordsExtractor):
         candidates = set()
         for start_index in range(len(normalized_text_as_list)):
             for candidate_length in range(1, cls.MAX_CANDIDATE_LENGTH+1):
-                if start_index + candidate_length <= len(normalized_text_as_list):
+                subarray_has_separator = '.' in normalized_text_as_list[start_index:start_index+candidate_length]
+                if start_index + candidate_length <= len(normalized_text_as_list) and not subarray_has_separator:
                     candidates.add(
                         ' ' .join(normalized_text_as_list[start_index:start_index+candidate_length])
                     )
