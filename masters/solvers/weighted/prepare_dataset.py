@@ -19,4 +19,4 @@ def prepare_wordpress_dataset(file_path):
 
 
 if __name__ == '__main__':
-    prepare_wordpress_dataset('~/Downloads/dataset.json')
+    prepare_wordpress_dataset('~/Downloads/wordpress.json')

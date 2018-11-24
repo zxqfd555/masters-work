@@ -4,7 +4,7 @@ import random
 
 class UnifiedDatasetRow:
 
-    def __init__(self, *, content_raw, content_clean, title_raw, title_clean, tags):
+    def __init__(self, content_raw, content_clean, title_raw, title_clean, tags):
         self._content_raw = content_raw
         self._content_clean = content_clean
         self._title_raw = title_raw
