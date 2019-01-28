@@ -66,6 +66,6 @@ class UnifiedDataset:
         Title: {}\n
         Text: {}\n
         Tags: {}
-        """.format(self._rows[row_index].title_clean, self._rows[row_index].content_clean, str(self._rows[row_index].tags))
+        """.format(self._rows[row_index].title_clean.encode('utf-8'), self._rows[row_index].content_clean.encode('utf-8'), str(self._rows[row_index].tags))
 
         return formatted_output

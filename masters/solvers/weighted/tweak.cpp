@@ -296,7 +296,7 @@ private:
             setSize = min(Texts.size(), TrainingSetSize);
         }
 
-        for (size_t i = 0; i < TrainingSetSize; ++i) {
+        for (size_t i = 0; i < setSize; ++i) {
             result += CalculateTextScore(Texts[i], hyperparams);
         }
         return result;
@@ -374,9 +374,9 @@ public:
     void RandomHyperparametersSearch() {
         int32_t bestHyperParams[HYPERPARAMS_NUM];
         bestHyperParams[0] = 200;  // weight per occurrence
-        bestHyperParams[1] = 0;  // weight per occurrence in title
+        bestHyperParams[1] = 1000;  // weight per occurrence in title
         bestHyperParams[2] = 1;  // penalty per first occurence position
-        bestHyperParams[3] = 3;  // bonus for partial occurrence in 2-gram
+        bestHyperParams[3] = 4;  // bonus for partial occurrence in 2-gram
         bestHyperParams[4] = 4;  // bonus for partial occurrence in 3-gram
         int64_t bestScore = CalculateScore(bestHyperParams);
         cerr << "The current best score is: " << bestScore << endl;
@@ -409,8 +409,8 @@ public:
         searchParams[0] = THyperParameter(0, 1000, 100);
         searchParams[1] = THyperParameter(0, 2000, 200);
         searchParams[2] = THyperParameter(0, 5, 1);
-        searchParams[3] = THyperParameter(0, 70, 7);
-        searchParams[4] = THyperParameter(0, 70, 7);
+        searchParams[3] = THyperParameter(0, 20, 4);
+        searchParams[4] = THyperParameter(0, 20, 4);
         
         uint64_t combinationsNumber = 1;
         for (size_t i = 0; i < HYPERPARAMS_NUM; ++i) {
@@ -433,7 +433,7 @@ public:
 
 int main () {
     optimizer.ReadInputData();
-    optimizer.SetTrainingSetSize(1000);
+    optimizer.SetTrainingSetSize(0);
     optimizer.RandomHyperparametersSearch();
 //    optimizer.GridHyperparametersSearch();
     return 0;
