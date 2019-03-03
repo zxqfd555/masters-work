@@ -56,7 +56,7 @@ if __name__ == '__main__':
             tokens = [int(x) for x in line.strip().split()]
             X_test.append(tokens[:-1])
             y_test.append(tokens[-1])
-    """ 
+     
     print('Trying RandomForestClassifier')
     clf = RandomForestClassifier(n_estimators=100)
     try_use_classifier(clf)
@@ -64,12 +64,11 @@ if __name__ == '__main__':
     print('Trying KNeighborsClassifier')
     clf = KNeighborsClassifier(n_neighbors=21)
     try_use_classifier(clf)
-    """
-    """
+
     print('Trying SVC')
     clf = SVC(probability=True)
     try_use_classifier(clf, prune_factor=61)
-    """
+
     print('Trying LogisticRegression')
     clf = LogisticRegression(class_weight='balanced')
     try_use_classifier(clf, model_name='regression.clf')
