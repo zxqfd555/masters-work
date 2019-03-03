@@ -1,0 +1,35 @@
+<html>
+    <title>
+        Keyword extractor demo
+    </title>
+    <script type="text/javascript" src="fox-stoplist.js"></script>
+    <script type="text/javascript" src="curly-enigma.js"></script>
+    <script>
+        function demoAnnotate() {
+            var inputTitle = document.getElementById("inputTitle").value;
+            var inputText = document.getElementById("inputText").value;
+            var tagsFormatted = "";
+            var tagsArray = generateTags(inputTitle, inputText);
+            for (var i = 0; i < tagsArray.length; ++i) {
+                tagsFormatted += tagsArray[i] + "\n";
+            }
+            console.log(tagsFormatted);
+            document.getElementById("output").value = tagsFormatted;
+        }
+    </script>
+    <body>
+        <p>
+            <textarea id="inputTitle" cols="80" rows="1"></textarea>
+        </p>
+        <p>
+            <textarea id="inputText" cols="120" rows="25"></textarea>
+        </p>
+        <p>
+            <textarea id="output" disabled=true rows="11"></textarea>
+        </p>
+        <p>
+            <input type="submit" value="Annotate with tags" onClick="demoAnnotate()"></input>
+        </p>
+    </body>
+</html>
+
