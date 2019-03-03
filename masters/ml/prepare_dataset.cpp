@@ -474,4 +474,3 @@ int main () {
     optimizer.ReadInputData();
     return 0;
 }
-

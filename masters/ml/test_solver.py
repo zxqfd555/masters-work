@@ -52,4 +52,3 @@ if __name__ == '__main__':
     flush_text()
 
     print('Right guesses:', total_correct)
-

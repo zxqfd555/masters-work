@@ -72,4 +72,3 @@ if __name__ == '__main__':
     print('Trying LogisticRegression')
     clf = LogisticRegression(class_weight='balanced')
     try_use_classifier(clf, model_name='regression.clf')
-
