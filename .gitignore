@@ -8,5 +8,8 @@ masters/crawlers/wordpress/dataset.json
 masters/crawlers/wiki/dataset.json
 **/__pycache__
 **/*.pyc
+**/wp.*
+**/features*
+**/test.txt
 local-helpers
-*.py
+*.pyc
