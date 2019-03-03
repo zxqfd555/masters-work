@@ -10,6 +10,15 @@ X = []
 y = []
 
 
+def clear_buffers():
+    global labels
+    global X
+    global y
+    X = []
+    y = []
+    labels = []
+
+
 def flush_text():
     global clf
     global total_correct
@@ -20,15 +29,7 @@ def flush_text():
     probs.sort(key=lambda x: -x[0])
     keywords_to_output = min(10, len(probs))
     total_correct += sum([x[1] for x in probs[:keywords_to_output]])
-
-    print(labels[-1], total_correct)
-
-    global labels
-    global X
-    global y
-    X = []
-    y = []
-    labels = []
+    clear_buffers()
 
 
 if __name__ == '__main__':
@@ -47,6 +48,7 @@ if __name__ == '__main__':
             labels.append(label)
             X.append(features)
             y.append(ground_truth)
+
     flush_text()
 
     print('Right guesses:', total_correct)
