@@ -9,9 +9,9 @@
 
 using namespace std;
 
-const string TEXTS_FILE = "wp.inputs.txt";
-const string TAGS_FILE = "wp.outputs.txt";
-const string TITLES_FILE = "wp.titles.txt";
+const string TEXTS_FILE = "wiki.inputs.txt";
+const string TAGS_FILE = "wiki.outputs.txt";
+const string TITLES_FILE = "wiki.titles.txt";
 const string STOPWORDS_FILE = "FoxStoplist.txt";
 
 const int32_t HYPERPARAMS_NUM = 5;
